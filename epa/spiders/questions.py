@@ -27,14 +27,14 @@ class QuestionsSpider(scrapy.Spider):
                     answer += "0 "
             yield {
                 "Question": quote.css("div.title::text").get(),
-                "QType": 2,
+                "QType": '2',
                 "Q_1": answers[0],
                 "Q_2": answers[1],
                 "Q_3": answers[2],
                 "Q_4": answers[3],
                 "Answers": answer,
                 "CorrectAnswer": correctAnswer,
-                "imageSrc": imageSrc,
-                "imageName": imageName,
+                "ImageSrc": imageSrc,
+                "ImageName": imageName,
             }
 
