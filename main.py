@@ -64,7 +64,7 @@ if __name__ == "__main__":
       templates=[
         {
           'name': 'Pole jednokrotnego wyboru',
-          'qfmt': '{{Question}}<hr>{{Q_1}}<br><br>{{Q_2}}<br><br>{{Q_3}}<br><br>{{Q_4}}<br>{{Image}}>',
+          'qfmt': '{{Question}}<hr>{{Q_1}}<br><br>{{Q_2}}<br><br>{{Q_3}}<br><br>{{Q_4}}<br><br>{{Image}}',
           'afmt': '{{FrontSide}}<hr id="answer">{{CorrectAnswer}}',
         },
       ])
