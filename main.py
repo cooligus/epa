@@ -84,7 +84,10 @@ if __name__ == "__main__":
 
             image = ''
             if elem['ImageName'] != None:
-                image = '<img src="{}">'.format(elem['ImageName'])
+                if elem['ImageName'][-3:] == 'mp4':
+                    image = '<video src="{}">'.format(elem['ImageName'])
+                else:
+                    image = '<img src="{}">'.format(elem['ImageName'])
             data.append(image)
             my_note = genanki.Note(
                 model=my_model,

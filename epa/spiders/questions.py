@@ -10,10 +10,16 @@ class QuestionsSpider(scrapy.Spider):
 
     def parse(self, response):
         for quote in response.css(".question"):
-            imageSrc = quote.css("div.image > img::attr(src)").get()
             imageName = None
+
+            imageSrc = quote.css("div.image > img::attr(src)").get()
             if imageSrc != None:
                 imageName = os.path.split(imageSrc)[-1]
+            else:
+                imageSrc = quote.css("div.image > video > source::attr(src)").get()
+                if imageSrc != None:
+                    imageName = os.path.split(imageSrc)[-1]
+
             answer = ""
             answers = []
             for htmlAnswer in quote.css("div.answer"):
