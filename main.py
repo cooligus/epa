@@ -14,6 +14,7 @@ if __name__ == "__main__":
     ANKI_DECK = 'dest/egzaminpraktyczny.apkg'
     BASE_URL = 'https://www.praktycznyegzamin.pl/inf03ee09e14/teoria/wszystko/'
 
+    print("Do you want to download questions? [y/n]")
     confirm = input()
     if confirm == "y":
         try:
@@ -30,17 +31,18 @@ if __name__ == "__main__":
         process.crawl(spider, start_urls = [BASE_URL])
         process.start()
     
+    print("Do you want to download images? [y/n]")
     confirm = input()
     if confirm == "y":
         with open(ITEMS) as f:
             d = json.load(f)
             for elem in d:
-                if elem['imageSrc'] == None:
+                if elem['ImageSrc'] == None:
                     continue
                 print(elem)
-                imageUrl = os.path.join(BASE_URL, elem['imageSrc'])
+                imageUrl = os.path.join(BASE_URL, elem['ImageSrc'])
                 img_data = requests.get(imageUrl).content
-                with open(os.path.join('tmp' + elem['imageName']), 'wb') as handler:
+                with open(os.path.join('tmp', elem['ImageName']), 'wb') as handler:
                     handler.write(img_data)
 
     my_deck = genanki.Deck(
@@ -92,4 +94,9 @@ if __name__ == "__main__":
                 my_package.media_files.append(os.path.join(BUILD, elem['ImageName']))
 
             my_deck.add_note(my_note)
+
+    try:
+        os.mkdir('dest')
+    except OSError:
+        pass
     my_package.write_to_file(ANKI_DECK)
