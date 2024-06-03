@@ -23,7 +23,8 @@ class QuestionsSpider(scrapy.Spider):
             answer = ""
             answers = []
             for htmlAnswer in quote.css("div.answer"):
-                possibleAnswer = htmlAnswer.css("div::text").get()
+                possibleAnswer = htmlAnswer.css("div::text, div *").extract()
+                possibleAnswer = " ".join(possibleAnswer[1:])
                 answers.append(possibleAnswer)
                 good = htmlAnswer.css(".correct").extract_first()
                 if good:
